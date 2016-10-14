@@ -15,7 +15,7 @@ module.exports = ['orange',
                     'yellowgreen',
                     'olive',
                     'darkolivegreen',
-                    'darkseegreen',
+                    'darkseagreen',
                     'teal',
                     'darkgreen',
 

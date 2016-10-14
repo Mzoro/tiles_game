@@ -6,9 +6,19 @@ class App extends React.Component {
     super();
     this.state = {
       tiles : {},
-      currentMove : {},
-      n: 4
+      currentMove : {}
     }
+  }
+  componentDidMount() { 
+    this.generateSamples(this.getValue()); 
+  }
+  getValue() {
+    var value = + prompt("enter size of board: 4 or 6 or 8")
+    if ( value != 4 && value != 6 && value != 8) {
+      alert("size must equal only 4 or 6 or 8")
+      return this.getValue()
+    }
+    else return value
   }
   handleMove(row, tile) {
    
@@ -43,7 +53,7 @@ class App extends React.Component {
       tiles : require('./sample_rows')
     });
   }
-  generateSamples (n) {
+  generateSamples(n) {
     let tilesSample = {}
     let allColors = require('./sample_colors')
     let restColors = []
@@ -75,14 +85,9 @@ class App extends React.Component {
   }
   render() {
     return (
-      <div >  
-        <div>    
-          { Object.keys(this.state.tiles).map(this.renderRow.bind(this)) }
-        </div>
-        <div>
-          <button onClick={this.generateSamples.bind(this, this.state.n)}>Start game!</button>  
-        </div> 
-      </div>    
+      <div>      
+        { Object.keys(this.state.tiles).map(this.renderRow.bind(this)) }
+      </div>   
     )  
   }
 }

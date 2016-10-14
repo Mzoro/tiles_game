@@ -10,7 +10,7 @@ class Tile extends React.Component {
       <button disabled={!(this.props.details.status === 'closed')} 
               onClick={this.onButtonClick.bind(this)} 
               style={{ background: buttonColor, 
-                       width: 130,
+                       width: 90,
                        height: 60}}>
       </button>
     )
