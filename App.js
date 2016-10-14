@@ -7,7 +7,17 @@ class App extends React.Component {
     this.state = {
       tiles : {},
       currentMove : {},
-      n: 4   
+      n: 4,
+      colors : {
+        orange : { first: [1,1], second: [1,2]},
+        brown:   { first: [1,3], second: [1,4]}, 
+        yellow:  { first: [2,1], second: [2,2]}, 
+        green:   { first: [2,3], second: [2,4]}, 
+        gray:    { first: [3,1], second: [3,2]}, 
+        blue:    { first: [3,3], second: [3,4]}, 
+        purple:  { first: [4,1], second: [4,2]}, 
+        pink:    { first: [4,3], second: [4,4]}
+      }   
     }
   }
   handleMove(row, tile) {
@@ -50,7 +60,18 @@ class App extends React.Component {
       for (var j=1; j<= n; j++) {
         tilesSample[`row - ${i}`][`tile - ${j}`]={}
         tilesSample[`row - ${i}`][`tile - ${j}`].status = 'closed'
-        tilesSample[`row - ${i}`][`tile - ${j}`].color = '#CD5C5C'
+        for (var key in this.state.colors) {
+           
+            console.log(this.state.colors[key]['first'][0])
+            console.log(this.state.colors[key]['second'])
+            if (this.state.colors[key]['first'][0] == i && this.state.colors[key]['first'][1] == j) {
+              console.log('first')
+              tilesSample[`row - ${i}`][`tile - ${j}`].color = `${key}`
+            }
+            if (this.state.colors[key]['second'][0] == i && this.state.colors[key]['second'][1] == j) {
+              tilesSample[`row - ${i}`][`tile - ${j}`].color = `${key}`
+            }    
+        }
       }
     }
     this.setState({ tiles : tilesSample });
