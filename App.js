@@ -6,7 +6,8 @@ class App extends React.Component {
     super();
     this.state = {
       tiles : {},
-      currentMove : {}      
+      currentMove : {},
+      n: 4   
     }
   }
   handleMove(row, tile) {
@@ -42,7 +43,18 @@ class App extends React.Component {
       tiles : require('./sample_rows')
     });
   }
-  
+  generateSamples (n) {
+    let tilesSample = {}
+    for (var i=1; i<= n; i++) {  
+      tilesSample[`row - ${i}`]={}
+      for (var j=1; j<= n; j++) {
+        tilesSample[`row - ${i}`][`tile - ${j}`]={}
+        tilesSample[`row - ${i}`][`tile - ${j}`].status = 'closed'
+        tilesSample[`row - ${i}`][`tile - ${j}`].color = '#CD5C5C'
+      }
+    }
+    this.setState({ tiles : tilesSample });
+  }
   renderRow(key) {
     return <Row key={key} 
                 index={key} 
@@ -56,7 +68,7 @@ class App extends React.Component {
           { Object.keys(this.state.tiles).map(this.renderRow.bind(this)) }
         </div>
         <div >
-          <button onClick={this.loadSamples.bind(this)}>Start game!</button>  
+          <button onClick={this.generateSamples.bind(this, this.state.n)}>Start game!</button>  
         </div> 
       </div>    
     )  
