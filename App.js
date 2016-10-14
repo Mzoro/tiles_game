@@ -7,8 +7,7 @@ class App extends React.Component {
     this.state = {
       tiles : {},
       currentMove : {},
-      n: 4,
-      colors : ['orange', 'brown', 'yellow', 'green', 'gray', 'blue', 'purple', 'pink']   
+      n: 4
     }
   }
   handleMove(row, tile) {
@@ -46,11 +45,18 @@ class App extends React.Component {
   }
   generateSamples (n) {
     let tilesSample = {}
-    let restColors = this.state.colors
-    restColors = restColors.concat(restColors)
+    let allColors = require('./sample_colors')
+    let restColors = []
     let rand = 0
+
+    for (var i=1; i<= n * n/2; i++) {
+      rand = Math.floor(Math.random() * allColors.length)
+      restColors.push(allColors[rand])
+      allColors.splice(rand, 1)
+    }
+    restColors = restColors.concat(restColors)
     for (var i=1; i<= n; i++) {  
-      tilesSample[`row - ${i}`]={}
+      tilesSample[`row - ${i}`] = {}
       for (var j=1; j<= n; j++) {
         tilesSample[`row - ${i}`][`tile - ${j}`]={}
         tilesSample[`row - ${i}`][`tile - ${j}`].status = 'closed'
@@ -73,7 +79,7 @@ class App extends React.Component {
         <div>    
           { Object.keys(this.state.tiles).map(this.renderRow.bind(this)) }
         </div>
-        <div >
+        <div>
           <button onClick={this.generateSamples.bind(this, this.state.n)}>Start game!</button>  
         </div> 
       </div>    
