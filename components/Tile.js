@@ -2,7 +2,7 @@ import React from 'react';
 
 class Tile extends React.Component {
   onButtonClick() {
-    this.props.handleMove(this.props.rowId, this.props.index);
+    this.props.handleMove(this.props.rowId, this.props.tileId);
   }
   render () {
     const buttonColor = (this.props.details.status === 'closed' ? 'white' : this.props.details.color );
